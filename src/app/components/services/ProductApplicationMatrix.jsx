@@ -1,45 +1,45 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Building2, Paintbrush, Blocks, CheckCircle, ChevronDown, TrendingUp, Sparkles, Database } from 'lucide-react';
+import { Building2, Paintbrush, Blocks, CheckCircle, ChevronDown, Database } from 'lucide-react';
 import Link from "next/link";
 
 // --- Custom Component for Accordion Row ---
-
 const MatrixRow = ({ item, index, isActive, onClick }) => {
   const goldGradient = "from-[#C49A6E] to-[#9C7C58]";
   const navyBlue = "text-[#15324A]";
 
   return (
     <div className={`border-b border-gray-200 transition-all duration-300 ${isActive ? 'bg-[#F9FAFB] shadow-inner' : 'hover:bg-gray-50'}`}>
-      {/* Header Row (Always Visible) */}
+      
+      {/* Header Row */}
       <button
         className="w-full p-4 md:p-6 flex items-center justify-between text-left focus:outline-none"
         onClick={onClick}
+        aria-expanded={isActive}
+        aria-controls={`accordion-content-${item.id}`}
       >
         <div className="flex items-center gap-4 flex-1">
-          {/* Icon & Application */}
           <div className={`w-10 h-10 flex-shrink-0 bg-[#DBE1E8] rounded-full flex items-center justify-center`}>
             <item.icon className={`w-5 h-5 ${navyBlue}`} />
           </div>
-          <h3 className={`text-lg font-semibold ${navyBlue} transition-colors duration-300 group-hover:text-[#9C7C58]`}>
+          <h3 className={`text-lg font-semibold ${navyBlue} transition-colors duration-300`}>
             {item.application}
           </h3>
         </div>
 
-        {/* Grade Badge (Quick View) */}
         <div className="hidden sm:block flex-shrink-0 w-1/4">
           <span className={`text-sm font-medium text-gray-600`}>{item.grade}</span>
         </div>
 
-        {/* Accordion Toggle Icon */}
         <div className="flex-shrink-0 w-8 flex justify-end">
           <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isActive ? 'rotate-180 text-[#9C7C58]' : ''}`} />
         </div>
       </button>
 
-      {/* Detailed Content (Collapsible) */}
+      {/* Collapsible Content */}
       <div
+        id={`accordion-content-${item.id}`}
         className={`overflow-hidden transition-all duration-500 ease-in-out ${isActive ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0'}`}
       >
         <div className="px-4 pb-4 md:px-6 md:pb-6 grid lg:grid-cols-3 gap-4 border-l-4 border-l-[#C49A6E] mx-4 sm:mx-0">
@@ -66,31 +66,31 @@ const MatrixRow = ({ item, index, isActive, onClick }) => {
 };
 
 // --- Main Component ---
-
 export default function ProfessionalProductMatrix() {
   const [activeIndex, setActiveIndex] = useState(null);
 
+  // Applications with safe, factual wording
   const applications = [
     {
       id: 1,
       icon: Building2,
       application: "Structural Concrete & RMC",
       grade: "Coarse/Fine Aggregate (IS:383)",
-      benefit: "Precision-graded for superior mix design, ensuring maximum **compressive strength** and optimal early-age durability required for major structural works.",
+      benefit: "Precision-graded to support consistent mix designs, helping achieve optimal compressive strength and early-age performance suitable for structural applications.",
     },
     {
       id: 2,
       icon: Paintbrush,
       application: "Surface Finishing & Plastering",
       grade: "Fine Grade (P-Sand)",
-      benefit: "Engineered for a **high-fidelity, smooth finish**, providing excellent surface characteristics, reduced shrinkage, and lower material wastage.",
+      benefit: "Engineered to provide a smooth, uniform finish with reduced shrinkage and minimal material wastage, ideal for plastering and surface finishing.",
     },
     {
       id: 3,
       icon: Blocks,
       application: "Masonry & Mortar",
       grade: "Medium Grade (M-Sand)",
-      benefit: "Optimally balanced for cohesive and robust mortar, resulting in stable, durable **brickwork and block laying** with reliable bond strength.",
+      benefit: "Optimally balanced for cohesive and durable mortar, supporting stable brickwork and block laying with reliable bonding characteristics.",
     }
   ];
 
@@ -103,13 +103,11 @@ export default function ProfessionalProductMatrix() {
 
   return (
     <div className="relative bg-white py-16 lg:py-24">
-
-      {/* Subtle Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-50/50 to-white/50 pointer-events-none"></div>
 
       <div className="relative z-10 container mx-auto px-6 max-w-6xl">
 
-        {/* Header Block */}
+        {/* Header */}
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <div className={`inline-flex items-center gap-2 px-5 py-1.5 bg-[#DBE1E8] text-xs font-bold tracking-widest uppercase rounded-full`}>
             <CheckCircle className={`w-4 h-4 ${navyBlue}`} />
@@ -117,25 +115,22 @@ export default function ProfessionalProductMatrix() {
           </div>
 
           <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mt-4 mb-3">
-            Optimal <span className={`bg-gradient-to-r ${goldGradientHeader} bg-clip-text text-transparent`}>Grade Selection</span>
+            Royal Sand Corporation – Optimal <span className={`bg-gradient-to-r ${goldGradientHeader} bg-clip-text text-transparent`}>Grade Selection</span>
           </h2>
 
           <p className="text-gray-600 text-lg mt-3">
-            A structured view of our precision-engineered sand grades matched to industry-specific construction requirements.
+            Explore our precision-engineered sand grades aligned to industry-specific construction requirements.
           </p>
         </div>
 
-        {/* Main Professional Matrix Card */}
+        {/* Accordion Table */}
         <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden">
-
-          {/* Table Header (Desktop/Tablet) */}
           <div className={`hidden sm:flex p-4 md:p-6 ${navyBlue} bg-[#DBE1E8] font-bold uppercase text-sm border-b border-gray-300`}>
             <div className="flex-1">Application Type</div>
             <div className="w-1/4">Recommended Grade</div>
-            <div className="w-8"></div> {/* Spacer for chevron */}
+            <div className="w-8"></div>
           </div>
 
-          {/* Accordion Rows */}
           {applications.map((item, index) => (
             <MatrixRow
               key={item.id}
