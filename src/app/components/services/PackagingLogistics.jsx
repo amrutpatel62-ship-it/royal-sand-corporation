@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion"; // <-- Import Framer Motion
+import { motion } from "framer-motion";
 import {
   Truck,
   Shield,
@@ -21,18 +21,19 @@ const LIGHT_GRAY = "#F8F9FA";
 const DARK_GRAY_TEXT = "#343A40";
 const OFF_WHITE = "#FFFFFF";
 
-// --- Data Structure (Unchanged) ---
+// --- Packaging Options ---
 const packagingOptions = [
   {
     id: 1,
     icon: Scaling,
     title: "1 Ton Jumbo Bags",
     subtitle: "FIBC Solution",
-    description: "Ideal for large-scale operations requiring crane/forklift handling and high-volume throughput.",
+    description:
+      "Designed for high-volume operations with crane or forklift handling, ensuring efficient bulk transport.",
     features: [
-      "1000 kg capacity verified",
-      "Optimized crane lift points",
-      "Cost-effective for bulk",
+      "Verified 1000 kg capacity",
+      "Optimized lifting points for safety",
+      "Cost-efficient for large-scale operations",
       "UV and moisture protected",
     ],
   },
@@ -41,11 +42,12 @@ const packagingOptions = [
     icon: Box,
     title: "Standard Bags (25kg/50kg)",
     subtitle: "Precision Units",
-    description: "Perfect for precise batch mixing, easy manual site handling, and simplified inventory tracking.",
+    description:
+      "Ideal for precise batch mixing, easy on-site handling, and streamlined inventory management.",
     features: [
       "Verified unit weight (25kg/50kg)",
-      "Ergonomic handling for manual labor",
-      "Sealed for quality assurance",
+      "Ergonomic manual handling",
+      "Sealed for consistent quality",
       "Simplified inventory tracking",
     ],
   },
@@ -54,14 +56,14 @@ const packagingOptions = [
     icon: Truck,
     title: "High-Volume Bulk Supply",
     subtitle: "Managed Fleet Delivery",
-    description: "Direct truck-to-site delivery for maximized site throughput and zero packaging waste liability.",
+    description:
+      "Direct truck-to-site delivery maximizes throughput while minimizing packaging waste and handling risks.",
     features: [
       "Real-time GPS tracking",
-      "Custom volume scheduling",
-      "Zero packaging waste liability",
-      "Optimized rapid discharge",
-      // Adding one more feature to showcase the effect on the last card
-      "Dedicated account management",
+      "Customizable delivery scheduling",
+      "Minimal packaging waste",
+      "Rapid site discharge optimization",
+      "Dedicated account support",
     ],
   },
 ];
@@ -72,11 +74,7 @@ const cardVariants = {
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.1, // Staggered delay for the 3 cards
-      duration: 0.5,
-      ease: "easeOut",
-    },
+    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" },
   }),
 };
 
@@ -85,78 +83,84 @@ const logisticsVariants = {
   visible: (i) => ({
     opacity: 1,
     x: 0,
-    transition: {
-      delay: i * 0.15 + 0.3, // Staggered delay for logistics items, after cards
-      duration: 0.6,
-      ease: "easeOut",
-    },
+    transition: { delay: i * 0.15 + 0.3, duration: 0.6, ease: "easeOut" },
   }),
 };
 
-// --- Main Component: Feature Showcase Layout (No Links) ---
+// --- Logistics Panel ---
+const logisticsCommitment = [
+  {
+    icon: Settings,
+    title: "Process Control",
+    description: "Quality checks integrated at loading, transit, and delivery.",
+  },
+  {
+    icon: MapPin,
+    title: "Tracked Fleet",
+    description: "Real-time visibility of material location via dedicated tracking platform.",
+  },
+  {
+    icon: Shield,
+    title: "Risk Mitigation",
+    description: "Ensured material integrity through professional handling and sealing.",
+  },
+];
 
-export default function FeatureShowcaseNoLinksLayout() {
-
-  const logisticsCommitment = [
-    { icon: Settings, title: "Process Control", description: "Integrated QA checks at loading, transit, and offloading." },
-    { icon: MapPin, title: "Tracked Fleet", description: "Real-time visibility into material location via dedicated platform." },
-    { icon: Shield, title: "Risk Mitigation", description: "Material integrity preserved through professional handling and sealing methods." },
-  ];
-
+// --- Main Component ---
+export default function FeatureShowcaseRoyalSand() {
   return (
-    <div className="relative bg-white py-16 lg:py-24">
-      
+    <section className="relative bg-white py-16 lg:py-24" aria-labelledby="packaging-logistics-header">
       <div className="relative z-10 container mx-auto px-6 max-w-7xl">
-        
         {/* Section Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
-          {/* Header is static but could also be animated */}
           <div className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
             <BarChart className="w-4 h-4" style={{ color: ANTIQUE_BRONZE }} />
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: NAVY_BLUE }}>
+            <span
+              className="text-xs font-bold tracking-widest uppercase"
+              style={{ color: NAVY_BLUE }}
+            >
               Supply Logistics & Packaging Tiers
             </span>
           </div>
 
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
-            Compare Our <span style={{ color: NAVY_BLUE }}>Engineered</span> <br />
+          <h2
+            id="packaging-logistics-header"
+            className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4"
+          >
+            Compare Our <span style={{ color: NAVY_BLUE }}>Engineered</span>{" "}
+            <br />
             <span style={{ color: METALLIC_GOLD }}>Delivery Solutions</span>
           </h2>
           <p className="text-lg mt-4" style={{ color: DARK_GRAY_TEXT }}>
-            Review the key specifications for each packaging and delivery method below.
+            Explore key specifications for each packaging and delivery method offered by Royal Sand Corporation.
           </p>
         </div>
-        
-        {/* --- Feature Showcase Grid --- */}
+
+        {/* Packaging Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {packagingOptions.map((option, index) => (
-            <motion.div // <-- Use motion.div for animation
+            <motion.div
               key={option.id}
-              className={`p-8 flex flex-col h-full rounded-xl shadow-lg cursor-pointer`}
-              style={{ 
-                backgroundColor: OFF_WHITE, 
+              className="p-8 flex flex-col h-full rounded-xl shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2"
+              style={{
+                backgroundColor: OFF_WHITE,
                 borderTop: `6px solid ${NAVY_BLUE}`,
-                borderBottom: `2px solid ${METALLIC_GOLD}`
+                borderBottom: `2px solid ${METALLIC_GOLD}`,
               }}
-              // Animation properties
               initial="hidden"
-              whileInView="visible" // Animation triggers when in view
-              viewport={{ once: true, amount: 0.5 }} // Triggers only once when 50% visible
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
               variants={cardVariants}
-              custom={index} // Pass index for staggered delay
-              // Live Effect (Hover)
-              whileHover={{ 
-                y: -5, // Lift the card slightly
-                boxShadow: "0 10px 15px rgba(0, 0, 0, 0.1)", // Add a softer shadow on hover
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }} // Smooth hover transition
+              custom={index}
+              whileHover={{ y: -5, boxShadow: "0 10px 15px rgba(0,0,0,0.1)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
-              
-              {/* Icon and Title Block */}
+              {/* Icon and Title */}
               <div className="mb-6 pb-4 border-b border-gray-100">
-                <option.icon 
-                  className="w-10 h-10 mb-3" 
-                  style={{ color: METALLIC_GOLD }} 
+                <option.icon
+                  className="w-10 h-10 mb-3"
+                  style={{ color: METALLIC_GOLD }}
+                  aria-hidden="true"
                 />
                 <h3 className="text-2xl font-extrabold mb-1" style={{ color: NAVY_BLUE }}>
                   {option.title}
@@ -167,23 +171,24 @@ export default function FeatureShowcaseNoLinksLayout() {
               </div>
 
               {/* Description */}
-              <p className={`text-base leading-relaxed mb-8`} style={{ color: DARK_GRAY_TEXT }}>
-                **Summary:** {option.description}
+              <p className="text-base leading-relaxed mb-8" style={{ color: DARK_GRAY_TEXT }}>
+                {option.description}
               </p>
 
-              {/* Feature List */}
+              {/* Features */}
               <div className="flex-grow">
-                <h4 className={`text-lg font-bold mb-3`} style={{ color: NAVY_BLUE }}>
+                <h4 className="text-lg font-bold mb-3" style={{ color: NAVY_BLUE }}>
                   Key Advantages:
                 </h4>
-                <ul className="space-y-3">
+                <ul className="space-y-3" role="list">
                   {option.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle 
-                        className="w-4 h-4 flex-shrink-0 mt-1" 
-                        style={{ color: ANTIQUE_BRONZE }} 
+                      <CheckCircle
+                        className="w-4 h-4 flex-shrink-0 mt-1"
+                        style={{ color: ANTIQUE_BRONZE }}
+                        aria-hidden="true"
                       />
-                      <span className={`text-sm`} style={{ color: DARK_GRAY_TEXT }}>
+                      <span className="text-sm" style={{ color: DARK_GRAY_TEXT }}>
                         {feature}
                       </span>
                     </li>
@@ -194,41 +199,37 @@ export default function FeatureShowcaseNoLinksLayout() {
           ))}
         </div>
 
-        {/* --- Integrated Logistics Summary Panel --- */}
+        {/* Logistics Summary */}
         <div className="mt-16 pt-8 border-t" style={{ borderColor: NAVY_BLUE }}>
           <h3 className="text-2xl font-extrabold mb-6 text-center" style={{ color: NAVY_BLUE }}>
             Our Logistics Framework: Accountability Built-in
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {logisticsCommitment.map((item, index) => (
-              <motion.div // <-- Use motion.div for animation and live effect
+              <motion.div
                 key={index}
-                className="flex items-start gap-4 p-6 rounded-lg shadow-md cursor-pointer" 
+                className="flex items-start gap-4 p-6 rounded-lg shadow-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2"
                 style={{ backgroundColor: LIGHT_GRAY, border: `1px solid ${ANTIQUE_BRONZE}` }}
-                // Animation properties
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
                 variants={logisticsVariants}
                 custom={index}
-                // Live Effect (Hover)
-                whileHover={{ scale: 1.03 }} // Subtle scale up on hover
+                whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                <item.icon className="w-6 h-6 flex-shrink-0" style={{ color: NAVY_BLUE }} />
+                <item.icon className="w-6 h-6 flex-shrink-0" style={{ color: NAVY_BLUE }} aria-hidden="true" />
                 <div>
                   <h4 className="text-lg font-bold mb-1" style={{ color: NAVY_BLUE }}>
                     {item.title}
                   </h4>
-                  <p className="text-sm text-gray-700">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-gray-700">{item.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
