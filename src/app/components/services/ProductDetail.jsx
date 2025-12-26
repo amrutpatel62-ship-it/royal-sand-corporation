@@ -25,22 +25,38 @@ export default function ProductDetail() {
     {
       icon: Droplets,
       title: "Purity & Cleaning",
-      description: "Washed to drastically reduce impurities like silt, clay, and organic matter, ensuring higher bond strength.",
-      benefits: ["99.9% purity", "Enhanced bonding", "Minimal silt content"],
+      description:
+        "Washed to significantly reduce impurities such as silt, clay, and organic matter, supporting improved bonding performance.",
+      benefits: [
+        "High purity material",
+        "Enhanced bonding",
+        "Low silt content"
+      ],
     },
     {
       icon: Layers,
       title: "Accurate Grading",
-      description: "Available in multiple, consistent grain sizes, reducing the need for costly on-site screening and adjustments.",
-      benefits: ["Multiple grain sizes", "Consistent quality", "No on-site screening"],
+      description:
+        "Available in multiple, consistent grain sizes, reducing the need for costly on-site screening and adjustments.",
+      benefits: [
+        "Multiple grain sizes",
+        "Consistent quality",
+        "No on-site screening"
+      ],
     },
     {
       icon: Award,
-      title: "Compliance",
-      description: "Guaranteed to meet or exceed relevant Indian Standard (IS) codes for specific structural applications.",
-      benefits: ["IS certified", "Quality assured", "Structural grade"],
+      title: "Standards Compliance",
+      description:
+        "Processed and tested in line with applicable Indian Standard (IS) guidelines for intended construction applications.",
+      benefits: [
+        "IS guideline compliant",
+        "Quality tested",
+        "Construction-grade material"
+      ],
     }
   ];
+
 
   return (
     <div
